@@ -4,6 +4,16 @@ local searchCooldowns = {}
 local tradePedModel = Config.RecycleJob.pedModel
 local Translations = Lang
 
+local blip = AddBlipForCoord(Config.RecycleJob.onDutyLocation.x, Config.RecycleJob.onDutyLocation.y, Config.RecycleJob.onDutyLocation.z)
+SetBlipSprite(blip, 365)
+SetBlipDisplay(blip, 4)
+SetBlipScale(blip, 0.7)
+SetBlipColour(blip, 2)
+SetBlipAsShortRange(blip, true)
+BeginTextCommandSetBlipName("STRING")
+AddTextComponentString("Recycling Center")
+EndTextCommandSetBlipName(blip)
+
 function DrawText3D(x, y, z, text)
     local onScreen, _x, _y = World3dToScreen2d(x, y, z)
     if onScreen then
@@ -51,18 +61,6 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)  
         local pedCoords = GetEntityCoords(PlayerPedId())
         local distance = #(pedCoords - vector3(Config.RecycleJob.onDutyLocation.x, Config.RecycleJob.onDutyLocation.y, Config.RecycleJob.onDutyLocation.z))
-
-        local blip = AddBlipForCoord(Config.RecycleJob.onDutyLocation.x, Config.RecycleJob.onDutyLocation.y, Config.RecycleJob.onDutyLocation.z)
-    
-        SetBlipSprite(blip, 365)  
-        SetBlipDisplay(blip, 4)  
-        SetBlipScale(blip, 0.6)  
-        SetBlipColour(blip, 2)  
-        SetBlipAsShortRange(blip, true) 
-    
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentString("Recycling Center")  
-        EndTextCommandSetBlipName(blip)
 
         if distance < 2.5 then
             DrawText3D(Config.RecycleJob.onDutyLocation.x, Config.RecycleJob.onDutyLocation.y, Config.RecycleJob.onDutyLocation.z + 1.0, Lang:t('info.toggle_duty'))
