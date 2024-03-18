@@ -36,3 +36,4 @@ ox_inventory/data/items -
 
     Enjoy the script if there are any bugs report it into our discord!
     Discord - https://discord.gg/8WceG2vTF6
+    Preiview - https://www.youtube.com/watch?v=eq7UcmXvlcc
